@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   // add yur domain name here
-  site: 'https://lexingtonthemes.com',
+  site: 'https://837732.xyz',
   compressHTML: true,
   integrations: [sitemap()]
 });
