@@ -7,7 +7,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   // add yur domain name here
-  site: 'https://837732.xyz',
+  site: 'https://xmxdx.github.io',
+  base: 'xmxdx.github.iox',
   compressHTML: true,
   integrations: [sitemap()]
 });
