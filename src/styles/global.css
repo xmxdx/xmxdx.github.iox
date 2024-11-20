@@ -1,7 +1,11 @@
 @import 'tailwindcss';
 @theme {
-  --color-primary: #fafafa;
-  --color-secondary: #ff00ff;
+  --bg: #333333;
+  /* --color-primary: #333333; */
+  --color-primary: var(--bg);
+  --fg: #ffff00;
+  /* --color-secondary: #ffff00; */
+  --color-secondary: var(--fg);
 }
 /* CSS */
 :root {

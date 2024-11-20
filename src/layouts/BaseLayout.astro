@@ -2,18 +2,48 @@
 import BaseHead from "../components/BaseHead.astro";
 ---
 
-<html lang="en" class="selection:bg-secondary selection:text-secondary">
+<html lang="en" class="selection:bg-secondary selection:text-primary">
   <head>
     <BaseHead />
   </head>
 
   <body class="bg-primary">
     <slot />
-    <script src="https://unpkg.com/mailgo@0.12.2/dist/mailgo.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/aos@2.3.1/dist/aos.js"
-    ></script>
-    <script type="text/javascript">
+    <script is:inline src="https://unpkg.com/mailgo@0.12.2/dist/mailgo.min.js"></script>
+    <script is:inline type="text/javascript" src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script is:inline src="https://colorjs.io/dist/color.global.min.js"></script>
+    <script is:inline type="text/javascript">
       AOS.init();
+
+      const c = ['blank', new Color("p3", [Math.random(), Math.random(), Math.random()])];
+      let idx = 0;
+      let stepColBg = [];
+      let stepColFg = [];
+      const newColors = (colors, steps=0) => colors[0].steps(colors[1], {
+          space: "lch",
+          outputSpace: "srgb",
+          maxDeltaE: 1, // max deltaE between consecutive steps (optional)
+          steps, // min number of steps
+          progression: x => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2,
+        });
+      const hueRot = (t) => {
+        requestAnimationFrame(hueRot);
+        if (idx === stepColBg.length) {
+          c.shift();
+          c.push(new Color("p3", [Math.random(), Math.random(), Math.random()]));
+          while (c[0].deltaE76(c[1]) < 80) {
+            c.pop();
+            c.push(new Color("p3", [Math.random(), Math.random(), Math.random()]));
+          }
+          stepColBg = newColors(c);
+          stepColFg = newColors([new Color("p3", c[0].coords.map(i=>(1-i))), new Color("p3", c[1].coords.map(i=>(1-i)))], stepColBg.length);
+          idx = 0;
+        }
+        document.documentElement.style.setProperty('--bg', stepColBg[idx]);
+        document.documentElement.style.setProperty('--fg', stepColFg[idx]);
+        idx++;
+      };
+      hueRot();
     </script>
   </body>
 </html>
