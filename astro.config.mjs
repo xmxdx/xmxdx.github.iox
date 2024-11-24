@@ -1,14 +1,14 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-import sitemap from "@astrojs/sitemap";
+import sitemap from '@astrojs/sitemap';
 export default defineConfig({
-   vite: {
+  vite: {
     plugins: [tailwindcss()],
   },
   // add yur domain name here
   site: 'https://xmxdx.github.io',
   base: 'xmxdx.github.iox',
   compressHTML: true,
-  integrations: [sitemap()]
+  integrations: [sitemap()],
 });

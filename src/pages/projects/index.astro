@@ -8,7 +8,8 @@ const projectEntries = await getCollection('projects');
   <ul class="text-secondary">
     {projectEntries.map(projectEntry => (
       <li>
-        <a href={`projects/${projectEntry.slug}`}>
+        {/* <a href={`projects/${projectEntry.slug}`}> */}
+        <a href={projectEntry.slug}>
           <div>
             <Picture
               src={projectEntry.data.feat_img}
